@@ -12,3 +12,57 @@
     margin: 1rem 0;
   }
 }
+
+// Image centering
+
+.text-align-center {
+  text-align: center;
+}
+
+img.centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.note {
+  background-color: var(--gray-bg);
+  padding: 2rem 1rem 1rem 1rem;
+  border-radius: .25rem;
+}
+
+.note::before {
+  margin: .7rem .3rem 0 0;
+}
+
+// applause-button
+
+applause-button {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto;
+
+  .count-container {
+    color: inherit;
+  }
+}
+
+.clap-count {
+  @extend h4;
+  color: var(--accent-color);
+  display: none;
+
+  svg {
+    height: 1em;
+    vertical-align: middle;
+    width: 1em;
+  }
+
+  .flat {
+    fill: var(--body-bg);
+  }
+
+  .outline {
+    fill: var(--accent-color);
+  }
+}

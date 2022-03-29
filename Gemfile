@@ -33,6 +33,7 @@ gem "duktape"
 gem "webrick"
 
 group :jekyll_plugins do
+  gem "github-pages"
   gem "jekyll-default-layout"
   gem "jekyll-feed"
   gem "jekyll-optional-front-matter"
@@ -44,6 +45,7 @@ group :jekyll_plugins do
   gem "jekyll-sitemap"
   gem "jekyll-titles-from-headings"
   gem "jekyll-include-cache"
+  gem "jemoji"
 
   # Non-Github Pages plugins:
   gem "jekyll-last-modified-at"

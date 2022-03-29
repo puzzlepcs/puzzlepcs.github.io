@@ -1,20 +1,8 @@
-# Hydejack Starter Kit
+# Repo for Personal Blog
 
-A quicker, cleaner way to get started blogging with [Hydejack](https://hydejack.com/).
+## About
+배운 것을 정리하고 기록하는 용도의 블로그 입니다.  
 
-## Quick Start
-### Running locally
-1. Clone repository (git users), or [download] and unzip.
-2. Open terminal, `cd` into root directory (where `_config.yml` is located)
-3. Run `bundle install` [^1]
-4. Run `bundle exec jekyll serve`
-5. Open <http://localhost:4000/hydejack-starter-kit/>
 
-## What's next?
-* Open files and read the comments
-* Read the [docs](https://hydejack.com/docs/)
-* Buy the [PRO version](https://hydejack.com/download/) to get the project and resume layout, newsletter subscription box, custom forms, and more.
-
-[^1]: Requires Bundler. Install with `gem install bundler`.
-
-[download]: https://github.com/hydecorp/hydejack-starter-kit/archive/master.zip
+## Hydejack-Starter-Kit
+[Hydejack-Starter-Kit](https://github.com/hydecorp/hydejack-starter-kit)을 사용하여 만들었습니다.  

@@ -3,13 +3,13 @@
 
 # Uncomment and set the URL of your site (with protocol, e.g. `https://`)
 # NOTE: You don't need to provide this property when hosting on GitHub Pages or Netlify.
-# url:                   https://username.github.io
+# url:                   https://puzzlepcs.github.io
 
 # Uncomment and set the "base URL" of your site.
 # When your site is in a subdirectory, set to `/<name of directory>`,
 # with a leading `/` but no trailing `/`. Use the empty string '' otherwise.
 # NOTE: You don't need to provide this property when hosting on GitHub Pages or Netlify.
-# baseurl:               '/hydejack-starter-kit'
+# baseurl:               ''
 
 
 # General settings
@@ -17,19 +17,19 @@
 
 # Language of your content in 2-letter code, e.g.: en, de.
 # You may also provide a location, e.g.: en-us, de_AT.
-lang:                  en
+lang:                  ko-KR, en-US
 
 # The title of your blog. Used in the sidebar and the browser tab.
-title:                 Starter Kit
+title:                 What I learned
 
 # A short description (~150 chars) of the page used for the meta description tag.
 # Can use markdown, but no more than one paragraph (enforced by `>`)
 description:           >
-  Hydejack is a boutique Jekyll theme for hackers, nerds, and academics,
-  with a focus on personal sites that are meant to impress.
+  Hello, there! This is a personal blog for writing down what I learned. 
 
 # A shorter description for the sidebar.
-tagline:               Change `tagline` in `_config.yml`
+tagline:               >
+  `Personal blog`
 
 # A list of keywords for your blog
 keywords:              []
@@ -37,24 +37,30 @@ keywords:              []
 # A (square) logo for your site.
 # If provided, it will be shown at the top of the sidebar.
 # It also used by the `jekyll-seo-tag` plugin.
-logo:                  /assets/img/logo.png
+logo:                  /assets/icons/icon-writing.png
+
+# Custom Favicon
+favicon:               /assets/icons/favicon.ico
+app_touch_icon:        /assets/icons/icon-writing.png
 
 # This should be the same author as first entry in `_data/authors.yml`.
 author:
   # Used by `jekyll-feed`:
-  name:                <firstname> <lastname>
-  email:               <mail@domain.tld>
+  name: puzzle pcs
+  email: spypuzzle1@gmail.com
   # # Used by `jekyll-seo-tag`:
   # twitter:             <username>
 
 # Add links to the sidebar.
 menu:
-  - title:             Example
-    url:               /example/
-  - title:             Documentation
-    url:               /docs/
-  - title:             About
+  - title:             "About."
     url:               /about/
+  - title:             "Study."
+    url:               /study/
+  - title:             "Etc."
+    url:               /etc/
+  - title:             "Tags."
+    url:               /tags/
 
 # Add links to the footer.
 # Typically you'll want to link to your cookie- or privacy policy (if appliable), etc..
@@ -67,10 +73,11 @@ legal:
     url:               /CHANGELOG/
 
 # This text will appear in a `<small>` tag in the footer of every page.
-copyright:             © 2021. All rights reserved.
+copyright:             © 2022. All rights reserved.
 
 # Format of the permalinks
-permalink:             /:categories/:year-:month-:day-:title/
+# permalink:             /:categories/:year-:month-:day-:title/
+permalink:              none
 
 # Pagination configuration (used by the `blog` layout)
 paginate:              10
@@ -80,21 +87,23 @@ paginate_path:         /:num/
 # Theme
 # ---------------------------------------------------------------------------------------
 
-theme: jekyll-theme-hydejack
-# remote_theme: hydecorp/hydejack@v9
+# theme: jekyll-theme-hydejack
+remote_theme: hydecorp/hydejack@v9
 
 
 # Customizaton
 # ----------------------------------------------------------------------------------------
  
 # Sidebar image and theme color of the site.
-accent_image:          /assets/img/sidebar-bg.jpg
-accent_color:          rgb(79,177,186)
+accent_image: 
+  background:          rgb(52, 190, 130)
+  overlay:             false
+accent_color:          rgb(52, 190, 130)
 
 # This is used for the `theme-color` meta tag,
 # which changes the background color of the browser UI in certain browsers.
 # Defaults to `accent_color`.
-theme_color:           rgb(25,55,71)
+theme_color:           rgb(52, 190, 130)
 
 # The string encoding which fonts to fetch from Google Fonts.
 # See: <https://hydejack.com/docs/configuration/>
@@ -102,11 +111,11 @@ google_fonts:          Roboto+Slab:700|Noto+Sans:400,400i,700,700i
 
 # The text font. Expects a string that is a valid CSS font-family value.
 # To change font-weight, see _sass/variables.scss
-font:                  Noto Sans, Helvetica, Arial, sans-serif
+font:                  Arial, Helvetica, sans-serif, Noto Sans
 
 # The font used for headings. Expects a string that is a valid CSS font-family value.
 # To change font-weight, see _sass/variables.scss
-font_heading:          Roboto Slab, Helvetica, Arial, sans-serif
+font_heading:          Arial, Helvetica, sans-serif, Roboto Slab
 
 # The font used for code blocks. Expects a string that is a valid CSS font-family value.
 font_code:             Fira Code, Menlo, Monaco, Consolas, monospace;
@@ -114,14 +123,14 @@ font_code:             Fira Code, Menlo, Monaco, Consolas, monospace;
 defaults:
   # You can use this to provide a default accent color and background for
   # all pages under a given path:
-  - scope:
-      path:            hyde/
-    values:
-      accent_color:    rgb(38,139,210)
-      theme_color:     rgb(32,32,32)
-      accent_image:
-        background:    rgb(32,32,32)
-        overlay:       false
+  # - scope:
+  #     path:            hyde/
+  #   values:
+  #     accent_color:    rgb(38,139,210)
+  #     theme_color:     rgb(32,32,32)
+  #     accent_image:
+  #       background:    rgb(32,32,32)
+  #       overlay:       false
 
   # Don't include documents in assets in the sitemap
   - scope:
@@ -135,11 +144,13 @@ defaults:
       layout:          plain
       sitemap:         false
 
-  # # You can use the following to enable comments on all posts.
-  # - scope:
-  #     type:            posts
-  #   values:
-  #     comments:        true
+  # You can use the following to enable comments on all posts.
+  - scope:
+      type:            posts
+    values:
+      # comments:        true
+      # https://applause-button.com/
+      applause_button: true
 
   # `jekyll-seo-tag` will mark collection outputs as `BlogPosting`,
   # but we want them to be `WebPage`s:
@@ -174,7 +185,7 @@ kramdown:
 
 # Setting a disqus shortname will enable the comment section on
 # pages with `comments: true` in the front matter.
-# disqus:                <username>
+# disqus:                puzzlepcs-github-io
 
 # Setting a tinyletter username will enable the newsletter subscription box.
 # PRO version only!
@@ -187,10 +198,10 @@ kramdown:
 
 hydejack:
   # Configure the order of complementary content on blog posts
-  post_addons:         [about, newsletter, related, random, comments]
+  post_addons:         [about, comments]
 
   # Configure the order of complementary content on project pages
-  project_addons:      [about, newsletter, other, comments]
+  project_addons:      [about, comments]
 
   # Set to `true` if you don't want to show an icon indicating external links
   no_mark_external:    false
@@ -334,6 +345,7 @@ plugins:
   - jekyll-titles-from-headings
   - jekyll-include-cache
   - jekyll-last-modified-at
+  - jemoji
 
 
 # SEO Tag
