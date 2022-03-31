@@ -148,7 +148,7 @@ defaults:
   - scope:
       type:            posts
     values:
-      # comments:        true
+      comments:        true
       # https://applause-button.com/
       applause_button: true
 
@@ -185,7 +185,8 @@ kramdown:
 
 # Setting a disqus shortname will enable the comment section on
 # pages with `comments: true` in the front matter.
-# disqus:                puzzlepcs-github-io
+disqus:
+  shortname:         puzzlepcs-github-io
 
 # Setting a tinyletter username will enable the newsletter subscription box.
 # PRO version only!
