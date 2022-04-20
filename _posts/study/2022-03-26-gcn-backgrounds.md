@@ -3,7 +3,12 @@ layout: post
 title: "[ICLR'17] GCN - Backgrounds"
 description: >
   GCN 논문을 읽기 전에 알면 좋은 개념들. Spectral Graph 이론 이해하기.
-sitemap:    true
+
+related_posts:
+  - _posts/study/2022-04-12-gcn-method.md
+
+image:      
+  path:     /assets/img/blog/gcn/cover.png
 category:   study
 tags:       papers
 ---
@@ -16,11 +21,8 @@ tags:       papers
 GCN 논문을 처음 접했을 때 Graph Laplacian과 Fourier Transform등 처음 보는 용어들이 한꺼번에 등장하여 정말 혼란스러웠다.. 이에 관련해서 찾아본 내용들을 정리해 보았다.   
 
 
-먼저, GCN에서 하고자 하는 것이 **Spectral graph convolution에서 Spatial graph convolution으로의 근사**이다. 본격적으로 논문을 읽기 전에 전반적인 graph signal과 spectral graph이론에 대해서 알고 있으면 논문이 하고자 하는 방향을 이해하기 쉬울 것이라고 생각한다. 엄밀하게 수학적으로 맞는 설명은 아니지만, 이해한 바를 최대한 쉽게 설명하려고 노력했다..!
-
-논문의 직접적인 내용은 이후에 작성할 예정이다.  
-
-
+먼저, GCN에서 하고자 하는 것이 **Spectral graph convolution에서 Spatial graph convolution으로의 근사**이다. 본격적으로 논문을 읽기 전에 전반적인 graph signal과 spectral graph이론에 대해서 알고 있으면 논문이 하고자 하는 것이 어떤건지 더 이해가 가기 쉬울 것 같다.  
+[논문 링크](https://arxiv.org/abs/1609.02907)
 
 ## 1. Graph signal
 ---
@@ -28,7 +30,7 @@ GCN 논문을 처음 접했을 때 Graph Laplacian과 Fourier Transform등 처�
 Graph signal은 entity간 연결관계 정보를 반영하는 signal로, $$ N $$개의 노드로 이루어진 graph에서 node마다 scalar 값을 갖는다.  
 
 
-![Graph signal](/assets/img/blog/2022-03-24/graph-signal.png)
+![Graph signal](/assets/img/blog/gcn/graph-signal.png)
 {:.centered}  
 
 Graph signal $$f$$. ([출처](https://web.media.mit.edu/~xdong/talk/BDI_GSP.pdf))
@@ -61,7 +63,7 @@ $$
 
 
 ### 2.2. Laplacian matrix의 의미
-한편 graph signal $$ f: \mathcal{V} \rightarrow \mathbb{R}^N $$이 주어졌을 때, $$L$$을 곱해주면 한 node와 연결되어 있는 node들의 signal의 차이를 나타내는 **difference operator**로 작용한다. 
+한편 graph signal $$ f: \mathcal{V} \rightarrow \mathbb{R}^N $$이 주어졌을 때, $$L$$을 곱해주면 한 node와 연결되어 있는 node들의 signal의 차이를 나타내는 **difference operator**로 작용한다. (다시 말해, node가 자신과 연결되어 있는 node들과 차이가 얼마나 나는지 알 수 있다.)
 
 
 $$
@@ -95,31 +97,31 @@ $$
 $$  
 
 
-이러한 Laplacian quadratic form $$f^{\top}Lf$$은 **graph signal $$f$$가 얼마나 smooth한지** (즉, graph signal이 그래프의 연결성을 잘 반영하는지)를 나타내는 값으로 사용된다.  
+이러한 Laplacian quadratic form $$f^{\top}Lf$$은 **graph signal $$f$$가 얼마나 smooth한지** (즉, **graph signal이 그래프의 연결성을 잘 반영하**는지)를 나타내는 값으로 사용된다.  
 
-다시 말해, graph signal이 smooth하다는 것은 연결되어 있는 node끼리 유사한 signal값을 갖는다는 의미이며, Laplacian quadratic form 값이 작을수록 노드 간 signal 값의 차가 작은 것이므로 해당 signal이 smooth하다고 할 수 있다.  
+다시 말해, 연결되어 있는 node끼리 유사한 signal값을 가지면 Laplacian quadratic form 값이 작아지고, 이런 signal은 smooth하다고 할 수 있다.  
 
 
-![frequency](/assets/img/blog/2022-03-24/frequency.png)
+![frequency](/assets/img/blog/gcn/frequency.png)
 {:.centered}  
 
 왼쪽이 오른쪽 보다 smooth한 graph signal이다. ([출처](https://web.media.mit.edu/~xdong/talk/BDI_GSP.pdf))
 {:.figcaption}
 
 
-이 때, graph signal의 smoothness는 "frequency"라고도 한다. 통상적인 주파수의 의미와 smoothness를 연결해서 생각해 보면, 주파수가 낮은 신호는 주파수가 높은 신호보다 smooth 하다고도 볼 수 있다. 같은 의미에서 smooth한 graph signal은 frequency가 작다고 할 수 있다. 
-즉, graph signal의 Laplacian quadratic form 값은 해당 그래프의 frequency라 볼 수 있다.  
+한편, graph signal의 smoothness는 "frequency"라고도 한다. 통상적인 주파수의 의미와 smoothness를 연결해서 생각해 보면, 주파수가 낮은 신호는 주파수가 높은 신호보다 smooth 하다고도 볼 수 있다. 같은 의미에서 smooth한 graph signal은 frequency가 작다고 할 수 있다. 
+즉, graph signal의 Laplacian quadratic form 값은 해당 graph signal의 frequency라 볼 수 있다.  
 
 결론적으로 다음과 Lapalcian quadratic form과 graph signal의 frequency, smoothness는 다음과 같이 정리할 수 있다.  
-
 
 > Laplacian quadratic form의 값의 작은 graph signal  
 > = frequecy가 작은 graph signal의 frequecy가 작음  
 > = smooth한 graph signal  
 {:.lead}
 
+이렇게 graph Laplacian qudratic form은 주어진 graph signal이 노드와 노드의 연결을 얼마나 반영하고 있는지를 나타내는 값으로 해석할 수 있다.  즉, 연결성을 잘 반영하는 graph signal을 찾는 문제를 graph Laplacian quadratic form을 최소화 하는 문제로 볼 수 있다.
 
-Laplacian quadratic form을 다시 한 번 살펴보면 GCN 논문 (1)번 식에 나오는 graph Laplacian regualarization term $$ \mathcal{L}_{reg} $$과 동일한 것을 알 수 있다. 해당 regularization term이 하고자 하는 것은 결국, *node feature $$ X $$를 최대한 smooth한 값으로 변환해주는 함수 $$ f $$를 찾는다*는 의미이다.  
+Laplacian quadratic form을 다시 한 번 살펴보면 GCN 논문 (1)번 식에 나오는 graph Laplacian regualarization term $$ \mathcal{L}_{reg} $$과 동일한 것을 알 수 있다. 해당 regularization term이 하고자 하는 것은 결국, *node feature $$ X $$를 최대한 그래프의 연결성을 잘 반영할 수 있도록 변환해주는 함수 $$ f $$를 찾는다*는 의미이다.  
 {:.note}
 
 
@@ -152,31 +154,31 @@ Spatial space의 벡터 $$ f $$를 spectral space의 벡터 $$ \hat{f} $$로 변
 {:.figcaption}  
 
 
-![gft](/assets/img/blog/2022-03-24/gft.png)
+![gft](/assets/img/blog/gcn/gft.png)
 {:.centered}
 
-Graph Fourier transform. 그림의 $$\mathcal{X}$$는 eigenvector이다.
+Graph Fourier transform. 그림의 $$\mathcal{X}$$는 eigenvector이다. ([출처](https://web.media.mit.edu/~xdong/talk/BDI_GSP.pdf))
 {:.figcaption}
 
 
 ## 4. Classical graph spectral filtering
 ---
-일반적인 signal frequency filtering에서는 Fourier transformation을 통해 frequency space에서 해당 signal을 표현하고, 필터(transfer function)를 적용한 뒤, 다시 inverse 연산을 하여 원래 space로 복원한다. 이런 과정을 통해 **signal의 noise를 제거하고 필요한 성분만을 남기게 된다**고 한다.  
+일반적인 signal frequency filtering에서는 Fourier transformation을 통해 frequency space에서 해당 signal을 표현하고, filter(transfer function)를 적용한 뒤, 다시 inverse 연산을 하여 원래 space로 복원한다. 이런 과정을 통해 **signal의 noise를 제거하고 필요한 성분만을 남기게 된다**고 한다.  
 
 이러한 과정을 graph signal에 대해 적용하는 것이 graph spectral filtering이다.  
 
 
-![graph spectral filtering](/assets/img/blog/2022-03-24/spectral-conv.png)
+![graph spectral filtering](/assets/img/blog/gcn/spectral-conv.png)
 {:.centered}  
 
-Graph spectral filtering 과정. 그림의 $$\mathcal{X}$$는 eigenvector이다.  
+Graph spectral filtering 과정. 그림의 $$\mathcal{X}$$는 eigenvector이다. ([출처](https://web.media.mit.edu/~xdong/talk/BDI_GSP.pdf))  
 {:.figcaption}  
 
 
 해당 과정을 단계별로 살펴보면 다음과 같다.  
 
 1. Graph signal을 Graph Fouier Transform(GFT)를 사용해 spectral space로 변환
-2. 필터 $$ \hat{g}(\Lambda) $$ 적용  
+2. filter $$ \hat{g}(\Lambda) $$ 적용  
   * $$
       \hat{g}(\Lambda) = 
         \begin{bmatrix}
@@ -185,8 +187,8 @@ Graph spectral filtering 과정. 그림의 $$\mathcal{X}$$는 eigenvector이다.
         0 & & \hat{g}(\lambda_{N-1})
         \end{bmatrix}
     $$  
-  * 이 때 필터 $$ \hat{g}(\Lambda) $$는 spectral space에서 어떤 frequency를 사용할지를 결정한다. 그림에서 filter 3가지가 이에 해당한다. 특정 주파수를 증폭하거나 사용하지 않아도 되는 주파수는 걸러주어 결과적으로 denoise 해주는 역할을 수행한다.
-  * 예를 들어 Low-pass filter (그림에서 가장 왼쪽 필터)를 사용하면, low frequency를 갖는 eigen value만을 사용하는 것이다.
+  * 이 때 filter $$ \hat{g}(\Lambda) $$는 spectral space에서 어떤 frequency를 사용할지를 결정한다. 그림에서 filter 3가지가 이에 해당한다. 특정 주파수를 증폭하거나 사용하지 않아도 되는 주파수는 걸러주어 결과적으로 denoise 해주는 역할을 수행한다.
+  * 예를 들어 Low-pass filter (그림에서 가장 왼쪽 filter)를 사용하면, low frequency를 갖는 eigen value만을 사용하는 것이다.
 3. Inverse-GFT(IGFT)를 사용해 spatial space로 복원
 
 이 3단계를 식으로 표현하면 $$ U \hat{g}(\Lambda) U^{\top} $$이 되는데, 논문의 (3)번 식도 동일한 과정을 거치는 것이다.
@@ -194,7 +196,8 @@ Graph spectral filtering 과정. 그림의 $$\mathcal{X}$$는 eigenvector이다.
 
 ## 5. Spectral graph convolution 
 ---
-딥러닝 이전의 spectral filtering은 그림의 3가지 필터와 같은 이미 정의된 필터 $$\hat{g}$$를 사용하였으나, 필터를 parameterize하여 학습하는 것이 바로 Spectral graph convolution이다.
+### 5.1. Spectral graph convolution 식
+딥러닝 이전의 고전적인 방법의 spectral filtering은 위 그림의 3가지 filter와 같은 *이미 정의된 filter*를 사용하였으나, filter를 parameterize하여 학습하는 것이 바로 Spectral graph convolution이다.
 
 $$
 g_{\theta} \star x = U g_{\theta} U^{\top} x \tag{3}
@@ -204,8 +207,17 @@ GCN 논문의 spectral graph convolution 식
 {:.figcaption}
 
 
+### 5.2. 왜 convolution 일까?  
+Convolutional Neurlal Networks에서의 filter와 비슷하기 때문이다. CNN에서 filter는 위치에 상관 없이 모든 곳에 적용되며, 목적함수에 최소화하는데 필요한 정보인 어떤 feature를 탐지한다.  
+
+한편, CNN은 이미지라는 정규화된 그래프 위에서 동작하는 neural networks이다. 이미지는 한 픽셀을 노드로 봤을 때, 이웃이 항상 8개 있는 그래프로 볼 수 있다.  
+
+임의의 개수의 이웃을 갖는 그래프에서 동작하게끔 spectral graph theory를 기반으로 일반화 해준 것이 spectral graph convolutional 이라고 할 수 있겠다. Spectral graph convolution에서도, 모든 node에 filter가 적용되며 목적함수를 최소화하는데 필요한 정보를 filtering 할 수 있도록 학습된다.  
+
+
 ## 참고글
 ---
 
 * [GCN(Graph Convolutional Networks)1편: Graph Laplacian부터 Graph Fourier Transform까지 (Spectral Graph Theory)](https://ahjeong.tistory.com/14)
 * [MIT Media Lab 자료](https://web.media.mit.edu/~xdong/talk/BDI_GSP.pdf)
+* [원작자 블로그](http://tkipf.github.io/graph-convolutional-networks/)
