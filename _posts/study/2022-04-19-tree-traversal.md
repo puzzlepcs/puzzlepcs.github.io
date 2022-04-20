@@ -34,7 +34,7 @@ class TreeNode:
 
 깊이 우선 탐색은 더 나아가 루트노드, 왼쪽 자식 노드, 오른쪽 자식 노드의 방문 순서에 따라 **inorder**, **preorder**, **postorder**로 나뉜다.
 
-* **Inorder**
+* **Inorder**: Left -> Node -> Right
     1. 왼쪽 서브트리를 순회한다. `Inorder(left-subtree)`
     2. 루트노드를 방문한다.
     3. 오른쪽 서브트리를 순회한다. `Inorder(right-subtree)`

@@ -12,11 +12,14 @@ redirect_from:
 블로그에 방문해 주셔서 감사합니다! 
 공부한 내용들을 정리하는 과정에서 배우는 것이 많기에, 정리할 필요가 있거나 공유할만한 내용들을 기록하려고 합니다.
 
-포스팅에 오류가 있다면 언제든지 알려주시기 바랍니다! :smile:
+포스팅에 오류가 있다면 언제든지 알려주시기 바랍니다. :smile:
 
 * :house: `Seoul, Republic of Korea`
 * :e-mail:  `spypuzzle@gmail.com`
 * :octocat: `github.com/puzzlepcs`
+
+## :wrench: Skills
+`python`, `PyTorch`, `TensorFlow`
 
 ## :sparkles: Interests
 `Machine Learning`, `Graph Embedding`, `Hypergraph Embedding` 
